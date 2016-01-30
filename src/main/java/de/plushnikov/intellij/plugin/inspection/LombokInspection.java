@@ -20,6 +20,7 @@ import java.util.HashSet;
 public class LombokInspection extends BaseJavaLocalInspectionTool {
 
   public LombokInspection() {
+
   }
 
   @NotNull
