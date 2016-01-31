@@ -154,8 +154,10 @@ intellij {
     pluginName 'lombok-plugin'
     plugins 'coverage'
 
+    // Use custom property from forked plugin
+    skipInstrumentNotNull = true
+
     updateSinceUntilBuild = false
-//    sameSinceUntilBuild = version == "LATEST-EAP-SNAPSHOT"
     sandboxDirectory = "${project.projectDir}/idea-sandbox/idea-${version}"
     systemProperty 'idea.is.internal', 'false'
     downloadSources !Boolean.valueOf(System.getenv('CI'))
@@ -166,3 +168,14 @@ intellij {
         password System.properties['intellij.publish.password']
     }
 }
+//task xyz << {
+//    ant.taskdef(name: 'instrumentIdeaExtensions',
+//            classname: 'com.intellij.ant.InstrumentIdeaExtensions',
+//            classpath: configurations.pmd.asPath)
+//    ant.instrumentIdeaExtensions(
+//            "srcdir": compileTask.project.files(srcDirs).asPath,
+//            "destdir": compileTask.destinationDir,
+//            "classpath": compileTask.classpath.asPath,
+//            "includeantruntime": false) {
+//    }
+//}
