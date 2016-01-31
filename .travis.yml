@@ -12,7 +12,7 @@ jdk:
   - oraclejdk8
 
 env:
-  - IDEA_VERSION=IC-13.1.6
+  - IDEA_VERSION=IC-12.1.7b
 
 before_install:
  - chmod +x gradlew
