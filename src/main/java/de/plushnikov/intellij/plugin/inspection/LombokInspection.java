@@ -19,10 +19,7 @@ import java.util.HashSet;
  */
 public class LombokInspection extends BaseJavaLocalInspectionTool {
 
-  private final LombokProcessorProvider processorProvider;
-
   public LombokInspection() {
-    processorProvider = LombokProcessorProvider.getInstance();
   }
 
   @NotNull
@@ -68,6 +65,7 @@ public class LombokInspection extends BaseJavaLocalInspectionTool {
 
       final Collection<LombokProblem> problems = new HashSet<LombokProblem>();
 
+      final LombokProcessorProvider processorProvider = LombokProcessorProvider.getInstance(annotation.getProject());
       for (Processor inspector : processorProvider.getProcessors(annotation)) {
         problems.addAll(inspector.verifyAnnotation(annotation));
       }
