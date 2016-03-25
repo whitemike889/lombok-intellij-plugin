@@ -116,6 +116,8 @@ copy {
 //    classpath configurations.gen, "${buildDir}/JFlex.jar"
 //}
 
+// compileJava.dependsOn(generatePsiAndParser)
+
 apply plugin: 'java'
 sourceCompatibility = javaVersion
 targetCompatibility = javaVersion
@@ -126,7 +128,6 @@ tasks.withType(JavaCompile) {
         options.bootClasspath = "$JDK6_HOME/jre/lib/rt.jar"
     }
 }
-//compileJava.dependsOn(generatePsiAndParser)
 
 plugins.withType(JavaPlugin) {
     test {
@@ -168,14 +169,3 @@ intellij {
         password System.properties['intellij.publish.password']
     }
 }
-//task xyz << {
-//    ant.taskdef(name: 'instrumentIdeaExtensions',
-//            classname: 'com.intellij.ant.InstrumentIdeaExtensions',
-//            classpath: configurations.pmd.asPath)
-//    ant.instrumentIdeaExtensions(
-//            "srcdir": compileTask.project.files(srcDirs).asPath,
-//            "destdir": compileTask.destinationDir,
-//            "classpath": compileTask.classpath.asPath,
-//            "includeantruntime": false) {
-//    }
-//}
