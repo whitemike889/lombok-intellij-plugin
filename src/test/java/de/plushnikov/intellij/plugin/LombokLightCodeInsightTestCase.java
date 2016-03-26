@@ -26,11 +26,6 @@ public abstract class LombokLightCodeInsightTestCase extends LightCodeInsightFix
   private static final String LOMBOK_SRC_PATH = "./generated/src";
 
   @Override
-  protected String getTestDataPath() {
-    return ".";
-  }
-
-  @Override
   protected String getBasePath() {
     return "testData";
   }
@@ -54,6 +49,7 @@ public abstract class LombokLightCodeInsightTestCase extends LightCodeInsightFix
   @Override
   public void setUp() throws Exception {
     super.setUp();
+    myFixture.setTestDataPath(".");
     loadFilesFrom(LOMBOK_SRC_PATH);
   }
 
@@ -79,7 +75,7 @@ public abstract class LombokLightCodeInsightTestCase extends LightCodeInsightFix
       String actualFileText = myFixture.getFile().getText();
       actualFileText = actualFileText.replace("java.lang.", "");
 
-      final String path = getTestDataPath() + "/" + expectedFile;
+      final String path = myFixture.getTestDataPath() + "/" + expectedFile;
       String expectedFileText = StringUtil.convertLineSeparators(FileUtil.loadFile(new File(path)));
 
       assertEquals(expectedFileText.replaceAll("\\s+", ""), actualFileText.replaceAll("\\s+", ""));

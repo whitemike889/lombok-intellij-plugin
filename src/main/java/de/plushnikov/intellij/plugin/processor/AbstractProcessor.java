@@ -8,7 +8,6 @@ import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiModifierList;
 import com.intellij.psi.PsiModifierListOwner;
 import com.intellij.psi.PsiType;
-import com.intellij.util.ArrayUtil;
 import de.plushnikov.intellij.plugin.lombokconfig.ConfigDiscovery;
 import de.plushnikov.intellij.plugin.lombokconfig.ConfigKeys;
 import de.plushnikov.intellij.plugin.processor.field.AccessorsInfo;
@@ -35,10 +34,12 @@ public abstract class AbstractProcessor implements Processor {
   /**
    * Anntotation classes this processor supports
    */
+  @NotNull
   private final Class<? extends Annotation>[] supportedAnnotationClasses;
   /**
    * Kind of output elements this processor supports
    */
+  @NotNull
   private final Class<? extends PsiElement> supportedClass;
 
   /**
@@ -52,7 +53,16 @@ public abstract class AbstractProcessor implements Processor {
                               @NotNull Class<? extends Annotation> supportedAnnotationClass,
                               @NotNull Class<? extends Annotation>... equivalentAnnotationClasses) {
     this.supportedClass = supportedClass;
-    this.supportedAnnotationClasses = ArrayUtil.prepend(supportedAnnotationClass, equivalentAnnotationClasses);
+    this.supportedAnnotationClasses = prepend(supportedAnnotationClass, equivalentAnnotationClasses);
+  }
+
+  @NotNull
+  private static Class<? extends Annotation>[] prepend(@NotNull Class<? extends Annotation> element, @NotNull Class<? extends Annotation>... array) {
+    int length = array.length;
+    Class<? extends Annotation>[] result = new Class[length + 1];
+    result[0] = element;
+    System.arraycopy(array, 0, result, 1, length);
+    return result;
   }
 
   @NotNull

@@ -1,20 +1,25 @@
 package de.plushnikov.intellij.plugin.action;
 
-import com.intellij.codeInsight.CodeInsightUtilBase;
 import com.intellij.codeInsight.generation.ClassMember;
 import com.intellij.codeInsight.generation.EncapsulatableClassMember;
 import com.intellij.codeInsight.generation.OverrideImplementUtil;
 import com.intellij.codeInsight.hint.HintManager;
+import com.intellij.codeInsight.hint.HintManagerImpl;
+import com.intellij.codeInsight.hint.HintUtil;
 import com.intellij.ide.util.MemberChooser;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiFile;
+import com.intellij.ui.LightweightHint;
+import org.jetbrains.annotations.NotNull;
 
+import javax.swing.*;
 import java.util.List;
 
 /**
@@ -34,7 +39,7 @@ public abstract class BaseRefactorHandler implements Runnable {
 
     List<EncapsulatableClassMember> classMembers = getEncapsulatableClassMembers(psiClass);
     chooser = new MemberChooser<ClassMember>(
-       classMembers.toArray(new ClassMember[classMembers.size()]), true, true, project);
+        classMembers.toArray(new ClassMember[classMembers.size()]), true, true, project);
     chooser.setTitle(getChooserTitle());
     chooser.setCopyJavadocVisible(false);
   }
@@ -65,7 +70,9 @@ public abstract class BaseRefactorHandler implements Runnable {
 
   @Override
   public void run() {
-    if (!CodeInsightUtilBase.prepareEditorForWrite(editor)) return;
+    if (!prepareEditorForWrite(editor)) {
+      return;
+    }
     if (!FileDocumentManager.getInstance().requestWriting(editor.getDocument(), project)) {
       return;
     }
@@ -74,5 +81,26 @@ public abstract class BaseRefactorHandler implements Runnable {
   }
 
   protected abstract void process(List<ClassMember> classMembers);
+
+  // Backported from IntellijCE 12
+
+  private boolean prepareEditorForWrite(@NotNull Editor editor) {
+    if (!editor.isViewer()) {
+      return true;
+    }
+    showReadOnlyViewWarning(editor);
+    return false;
+  }
+
+  private void showReadOnlyViewWarning(Editor editor) {
+    if (ApplicationManager.getApplication().isHeadlessEnvironment()) {
+      return;
+    }
+
+    JComponent component = HintUtil.createInformationLabel("This view is read-only");
+    final LightweightHint hint = new LightweightHint(component);
+    HintManagerImpl.getInstanceImpl().showEditorHint(hint, editor, HintManager.UNDER,
+        HintManager.HIDE_BY_ANY_KEY | HintManager.HIDE_BY_TEXT_CHANGE | HintManager.HIDE_BY_SCROLLING, 0, false);
+  }
 
 }

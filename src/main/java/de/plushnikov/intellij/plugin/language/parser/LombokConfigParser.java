@@ -9,18 +9,16 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 
-import static com.intellij.lang.parser.GeneratedParserUtilBase.TOKEN_ADVANCER;
-import static com.intellij.lang.parser.GeneratedParserUtilBase._SECTION_GENERAL_;
-import static com.intellij.lang.parser.GeneratedParserUtilBase._SECTION_RECOVER_;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.adapt_builder_;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.consumeToken;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.consumeTokens;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.empty_element_parsed_guard_;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.enterErrorRecordingSection;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.exitErrorRecordingSection;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.nextTokenIs;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.recursion_guard_;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.replaceVariants;
+import static de.plushnikov.intellij.plugin.language.psi.GeneratedParserUtilBase._SECTION_GENERAL_;
+import static de.plushnikov.intellij.plugin.language.psi.GeneratedParserUtilBase.adapt_builder_;
+import static de.plushnikov.intellij.plugin.language.psi.GeneratedParserUtilBase.consumeToken;
+import static de.plushnikov.intellij.plugin.language.psi.GeneratedParserUtilBase.consumeTokens;
+import static de.plushnikov.intellij.plugin.language.psi.GeneratedParserUtilBase.empty_element_parsed_guard_;
+import static de.plushnikov.intellij.plugin.language.psi.GeneratedParserUtilBase.enterErrorRecordingSection;
+import static de.plushnikov.intellij.plugin.language.psi.GeneratedParserUtilBase.exitErrorRecordingSection;
+import static de.plushnikov.intellij.plugin.language.psi.GeneratedParserUtilBase.nextTokenIs;
+import static de.plushnikov.intellij.plugin.language.psi.GeneratedParserUtilBase.recursion_guard_;
+import static de.plushnikov.intellij.plugin.language.psi.GeneratedParserUtilBase.replaceVariants;
 import static de.plushnikov.intellij.plugin.language.psi.LombokConfigTypes.CLEANER;
 import static de.plushnikov.intellij.plugin.language.psi.LombokConfigTypes.CLEAR;
 import static de.plushnikov.intellij.plugin.language.psi.LombokConfigTypes.COMMENT;
@@ -50,9 +48,10 @@ public class LombokConfigParser implements PsiParser {
       result_ = property(builder_, level_ + 1);
     } else {
       Marker marker_ = builder_.mark();
-      enterErrorRecordingSection(builder_, level_, _SECTION_RECOVER_, null);
       result_ = parse_root_(root_, builder_, level_);
-      exitErrorRecordingSection(builder_, level_, result_, true, _SECTION_RECOVER_, TOKEN_ADVANCER);
+      while (builder_.getTokenType() != null) {
+        builder_.advanceLexer();
+      }
       marker_.done(root_);
     }
     return builder_.getTreeBuilt();
@@ -63,9 +62,17 @@ public class LombokConfigParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // CLEAR KEY
+  // (CLEAR KEY)
   public static boolean cleaner(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "cleaner")) {
+      return false;
+    }
+    return cleaner_0(builder_, level_ + 1);
+  }
+
+  // CLEAR KEY
+  private static boolean cleaner_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "cleaner_0")) {
       return false;
     }
     if (!nextTokenIs(builder_, CLEAR)) {
@@ -83,9 +90,17 @@ public class LombokConfigParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // property|cleaner|COMMENT|CRLF
+  // (property|cleaner|COMMENT|CRLF)
   static boolean item_(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "item_")) {
+      return false;
+    }
+    return item__0(builder_, level_ + 1);
+  }
+
+  // property|cleaner|COMMENT|CRLF
+  private static boolean item__0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "item__0")) {
       return false;
     }
     boolean result_ = false;
@@ -142,9 +157,17 @@ public class LombokConfigParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // KEY operation VALUE
+  // (KEY operation VALUE)
   public static boolean property(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "property")) {
+      return false;
+    }
+    return property_0(builder_, level_ + 1);
+  }
+
+  // KEY operation VALUE
+  private static boolean property_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "property_0")) {
       return false;
     }
     if (!nextTokenIs(builder_, KEY)) {

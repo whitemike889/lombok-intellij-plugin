@@ -4,7 +4,6 @@ import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.components.StoragePathMacros;
 import de.plushnikov.intellij.plugin.Version;
 import org.jetbrains.annotations.Nullable;
 
@@ -13,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
  */
 @State(
     name = "LombokSettings",
-    storages = @Storage(id = "other", file = StoragePathMacros.APP_CONFIG + "/lombok.xml")
+    storages = @Storage(id = "other", file = "$APP_CONFIG$/lombok.xml")
 )
 public class LombokSettings implements PersistentStateComponent<LombokPluginState> {
 

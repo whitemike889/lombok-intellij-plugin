@@ -12,7 +12,6 @@ import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiModifier;
 import com.intellij.psi.PsiType;
 import com.intellij.psi.PsiTypeParameter;
-import com.intellij.psi.impl.source.PsiExtensibleClass;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,11 +34,7 @@ public class PsiClassUtil {
    */
   @NotNull
   public static Collection<PsiMethod> collectClassMethodsIntern(@NotNull PsiClass psiClass) {
-    if (psiClass instanceof PsiExtensibleClass) {
-      return new ArrayList<PsiMethod>(((PsiExtensibleClass) psiClass).getOwnMethods());
-    } else {
       return filterPsiElements(psiClass, PsiMethod.class);
-    }
   }
 
   /**
@@ -50,11 +45,7 @@ public class PsiClassUtil {
    */
   @NotNull
   public static Collection<PsiField> collectClassFieldsIntern(@NotNull PsiClass psiClass) {
-    if (psiClass instanceof PsiExtensibleClass) {
-      return ((PsiExtensibleClass) psiClass).getOwnFields();
-    } else {
       return filterPsiElements(psiClass, PsiField.class);
-    }
   }
 
   /**
@@ -65,14 +56,10 @@ public class PsiClassUtil {
    */
   @NotNull
   public static Collection<PsiClass> collectInnerClassesIntern(@NotNull PsiClass psiClass) {
-    if (psiClass instanceof PsiExtensibleClass) {
-      return ((PsiExtensibleClass) psiClass).getOwnInnerClasses();
-    } else {
       return filterPsiElements(psiClass, PsiClass.class);
-    }
   }
 
-  protected static <T extends PsiElement> Collection<T> filterPsiElements(@NotNull PsiClass psiClass, @NotNull Class<T> disiredClass) {
+  private static <T extends PsiElement> Collection<T> filterPsiElements(@NotNull PsiClass psiClass, @NotNull Class<T> disiredClass) {
     Collection<T> result = new ArrayList<T>();
     for (PsiElement psiElement : psiClass.getChildren()) {
       if (disiredClass.isAssignableFrom(psiElement.getClass())) {
@@ -132,7 +119,7 @@ public class PsiClassUtil {
    * Creates a PsiType for a PsiClass enriched with generic substitution information if available
    */
   @NotNull
-  public static PsiType getTypeWithGenerics(@NotNull PsiClass psiClass, @NotNull PsiTypeParameter... classTypeParameters) {
+  private static PsiType getTypeWithGenerics(@NotNull PsiClass psiClass, @NotNull PsiTypeParameter... classTypeParameters) {
     PsiType result;
     final PsiElementFactory factory = JavaPsiFacade.getElementFactory(psiClass.getProject());
     if (classTypeParameters.length > 0) {

@@ -8,7 +8,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.augment.PsiAugmentProvider;
-import com.intellij.psi.impl.source.PsiExtensibleClass;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiModificationTracker;
@@ -45,7 +44,7 @@ public class LombokAugmentProvider extends PsiAugmentProvider {
     }
     // Expecting that we are only augmenting an PsiClass
     // Don't filter !isPhysical elements or code auto completion will not work
-    if (!(element instanceof PsiExtensibleClass) || !element.isValid()) {
+    if (!(element instanceof PsiClass) || !element.isValid()) {
       return emptyResult;
     }
     // Skip processing of Annotations and Interfaces

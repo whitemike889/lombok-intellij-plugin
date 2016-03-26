@@ -1,5 +1,6 @@
 package de.plushnikov.intellij.plugin;
 
+import com.intellij.codeInspection.ex.LocalInspectionToolWrapper;
 import com.intellij.openapi.projectRoots.JavaSdk;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.LanguageLevelProjectExtension;
@@ -25,7 +26,7 @@ public class InspectionTest extends InspectionTestCase {
   }
 
   private void doTest() throws Exception {
-    doTest(getTestName(true), new LombokInspection(), "java 1.7");
+    doTest(getTestName(true), new LocalInspectionToolWrapper(new LombokInspection()), "java 1.7");
   }
 
   public void testIssue37() throws Exception {

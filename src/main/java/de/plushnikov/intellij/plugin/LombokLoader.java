@@ -44,7 +44,7 @@ public class LombokLoader implements ApplicationComponent {
           LombokBundle.message("daemon.donate.title", Version.PLUGIN_VERSION),
           LombokBundle.message("daemon.donate.content"),
           NotificationType.INFORMATION,
-          new NotificationListener.UrlOpeningListener(false)
+          NotificationListener.URL_OPENING_LISTENER
       );
 
       Notifications.Bus.notify(notification);

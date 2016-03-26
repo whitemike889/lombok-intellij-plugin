@@ -5,7 +5,7 @@
     <vendor url="https://github.com/mplushnikov/lombok-intellij-plugin" email="lombokplugin@plushnikov.de">Michail Plushnikov</vendor>
     <version>0.10</version>
 
-    <idea-version since-build="123.00" until-build="132.9999"/>
+    <idea-version since-build="110.3" until-build="122.9999"/>
 
     <description>A plugin that adds first-class support for Project Lombok</description>
     <category>Tools Integration</category>

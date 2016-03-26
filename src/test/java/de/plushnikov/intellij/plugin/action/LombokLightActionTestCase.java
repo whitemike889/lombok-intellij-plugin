@@ -16,7 +16,7 @@ public abstract class LombokLightActionTestCase extends LombokLightCodeInsightTe
     checkResultByFile(getBasePath() + "/after" + getTestName(false) + ".java");
   }
 
-  protected void performActionTest() {
+  private void performActionTest() {
     AnAction anAction = getAction();
 
     AsyncResult<DataContext> contextResult = DataManager.getInstance().getDataContextFromFocus();
