@@ -1,5 +1,5 @@
 plugins {
-    id "org.jetbrains.intellij" version "0.0.39"
+    id "org.jetbrains.intellij" version "0.0.43"
     id "de.undercouch.download" version '2.1.0'
 }
 
@@ -87,6 +87,11 @@ tasks.withType(JavaCompile) {
     if (!Boolean.valueOf(System.getenv('CI'))) {
         options.bootClasspath = "$JDK6_HOME/jre/lib/rt.jar"
     }
+}
+
+compileJava {
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
 }
 
 plugins.withType(JavaPlugin) {

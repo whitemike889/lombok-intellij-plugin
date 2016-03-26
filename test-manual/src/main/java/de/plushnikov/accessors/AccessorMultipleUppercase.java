@@ -3,8 +3,6 @@ package de.plushnikov.accessors;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 
-import java.util.Arrays;
-
 @Getter
 @Accessors(fluent = true, chain = true, prefix = {"f", ""})
 public class AccessorMultipleUppercase {
