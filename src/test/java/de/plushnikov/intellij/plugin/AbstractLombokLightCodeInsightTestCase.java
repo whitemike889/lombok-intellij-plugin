@@ -14,6 +14,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.LightProjectDescriptor;
 import com.intellij.testFramework.fixtures.DefaultLightProjectDescriptor;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
+import com.intellij.util.PathUtil;
 import junit.framework.ComparisonFailure;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,7 +23,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public abstract class LombokLightCodeInsightTestCase extends LightCodeInsightFixtureTestCase {
+public abstract class AbstractLombokLightCodeInsightTestCase extends LightCodeInsightFixtureTestCase {
   private static final String LOMBOK_SRC_PATH = "./generated/src";
 
   @Override
@@ -60,7 +61,7 @@ public abstract class LombokLightCodeInsightTestCase extends LightCodeInsightFix
   private void loadFilesFrom(final String srcPath) {
     List<File> filesByMask = FileUtil.findFilesByMask(Pattern.compile(".*\\.java"), new File(srcPath));
     for (File javaFile : filesByMask) {
-      String filePath = javaFile.getPath().replace("\\", "/");
+      String filePath = PathUtil.toSystemIndependentName(javaFile.getPath());
       myFixture.copyFileToProject(filePath, filePath.substring(srcPath.length() + 1));
     }
   }

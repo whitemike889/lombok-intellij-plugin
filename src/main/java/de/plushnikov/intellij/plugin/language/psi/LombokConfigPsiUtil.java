@@ -30,4 +30,14 @@ public class LombokConfigPsiUtil {
       return null;
     }
   }
+
+  public static String getSign(@NotNull LombokConfigProperty element) {
+    ASTNode valueNode = element.getOperation().getNode().findChildByType(LombokConfigTypes.SIGN);
+    if (valueNode != null) {
+      final String valueNodeText = valueNode.getText();
+      return null == valueNodeText ? null : valueNodeText.trim();
+    } else {
+      return null;
+    }
+  }
 }
