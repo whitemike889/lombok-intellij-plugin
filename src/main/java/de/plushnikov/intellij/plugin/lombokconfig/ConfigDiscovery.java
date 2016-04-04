@@ -2,12 +2,12 @@ package de.plushnikov.intellij.plugin.lombokconfig;
 
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.util.PathUtil;
 import com.intellij.util.indexing.FileBasedIndex;
 import de.plushnikov.intellij.plugin.psi.LombokLightClassBuilder;
 import org.jetbrains.annotations.NotNull;
@@ -97,7 +97,7 @@ public class ConfigDiscovery {
         }
       }
     }
-    return PathUtil.toSystemIndependentName(canonicalPath);
+    return FileUtil.toSystemIndependentName(null == canonicalPath ? "" : canonicalPath);
   }
 
   @NotNull

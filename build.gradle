@@ -34,7 +34,8 @@ dependencies {
     gen files('lib/grammar-kit.jar')
     gen files('lib/light-psi-all.jar')
 
-    dependencies { testCompile "org.mockito:mockito-core:1.+" }
+    testCompile "org.mockito:mockito-core:1.+"
+    testCompile 'junit:junit:4.12'
 }
 
 
@@ -147,5 +148,3 @@ intellij {
         password System.properties['intellij.publish.password']
     }
 }
-
-compileJava.dependsOn(generatePsiAndParser)
