@@ -56,8 +56,4 @@ public class InspectionTest extends InspectionTestCase {
     doTest();
   }
 
-  public void testValInspection() throws Exception {
-    doTest();
-  }
-
 }

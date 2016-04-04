@@ -85,7 +85,8 @@ public class LombokConfigIndex extends FileBasedIndexExtension<ConfigIndexKey, S
           if (null == sign) {
             result.put(key, value);
           } else {
-            final String previousValue = StringUtil.defaultIfEmpty(result.get(key), "");
+            final String resultValue = result.get(key);
+            final String previousValue = null == resultValue ? "" : resultValue;
             final String combinedValue = previousValue + sign + value + ";";
             result.put(key, combinedValue);
           }

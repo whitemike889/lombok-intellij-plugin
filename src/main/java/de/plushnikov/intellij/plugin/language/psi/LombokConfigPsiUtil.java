@@ -1,7 +1,6 @@
 package de.plushnikov.intellij.plugin.language.psi;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.text.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class LombokConfigPsiUtil {
@@ -35,7 +34,8 @@ public class LombokConfigPsiUtil {
   public static String getSign(@NotNull LombokConfigProperty element) {
     ASTNode valueNode = element.getOperation().getNode().findChildByType(LombokConfigTypes.SIGN);
     if (valueNode != null) {
-      return StringUtil.trim(valueNode.getText());
+      final String valueNodeText = valueNode.getText();
+      return null == valueNodeText ? null : valueNodeText.trim();
     } else {
       return null;
     }

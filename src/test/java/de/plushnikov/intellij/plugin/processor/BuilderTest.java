@@ -1,5 +1,6 @@
 package de.plushnikov.intellij.plugin.processor;
 
+
 import de.plushnikov.intellij.plugin.AbstractLombokParsingTestCase;
 
 import java.io.IOException;
