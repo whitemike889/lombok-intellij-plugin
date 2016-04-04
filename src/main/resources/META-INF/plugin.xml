@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <idea-plugin version="2" url="https://github.com/mplushnikov/lombok-intellij-plugin">
-    <id>Lombook Plugin</id>
-    <name>Lombok Plugin</name>
-    <vendor url="https://github.com/mplushnikov/lombok-intellij-plugin" email="lombokplugin@plushnikov.de">Michail Plushnikov</vendor>
-    <version>0.10</version>
+  <id>Lombook Plugin</id>
+  <name>Lombok Plugin</name>
+  <vendor url="https://github.com/mplushnikov/lombok-intellij-plugin" email="lombokplugin@plushnikov.de">Michail Plushnikov</vendor>
+  <version>0.11</version>
 
     <idea-version since-build="110.3" until-build="122.9999"/>
 
@@ -30,7 +30,8 @@
 
         <projectService serviceImplementation="de.plushnikov.intellij.plugin.provider.LombokProcessorProvider"/>
 
-        <applicationService serviceImplementation="de.plushnikov.intellij.plugin.settings.LombokSettings"/>
+      <applicationService serviceImplementation="de.plushnikov.intellij.plugin.lombokconfig.ConfigDiscovery"/>
+      <applicationService serviceImplementation="de.plushnikov.intellij.plugin.settings.LombokSettings"/>
 
         <lang.psiAugmentProvider implementation="de.plushnikov.intellij.plugin.provider.LombokAugmentProvider"/>
         <implicitUsageProvider implementation="de.plushnikov.intellij.plugin.provider.LombokImplicitUsageProvider"/>
@@ -190,6 +191,13 @@
     <!--TODO @Builder is not supported on constructors with constructor type parameters..-->
     <change-notes><![CDATA[
 		<ul>
+		<li>0.11
+				<ol>
+				     <li>Fixed #153: Configuration keys</li>
+				     <li>Fixed #125: Support for lombok.getter.noIsPrefix</li>
+				     <li>Fixed #128: Support @Slf4j with custom logger name</li>
+				</ol>
+			</li>
 		<li>0.10
 				<ol>
 				     <li>Overall significant performance optimizations</li>

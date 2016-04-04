@@ -31,12 +31,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 /**
  * Base test case for testing that the Lombok plugin parses the Lombok annotations correctly.
  */
-public abstract class LombokParsingTestCase extends LombokLightCodeInsightTestCase {
+public abstract class AbstractLombokParsingTestCase extends AbstractLombokLightCodeInsightTestCase {
 
-  private static final Logger LOG = Logger.getLogger(LombokParsingTestCase.class);
+  private static final Logger LOG = Logger.getLogger(AbstractLombokParsingTestCase.class);
 
   protected boolean shouldCompareAnnotations() {
     return false;
@@ -51,12 +54,15 @@ public abstract class LombokParsingTestCase extends LombokLightCodeInsightTestCa
   }
 
   public void doTest() throws IOException {
-    doTest(getTestName(false).replace('$', '/') + ".java");
+    final String fileName = getTestName(false).replace('$', '/') + ".java";
+    final String beforeFileName = "before/" + fileName;
+    final String afterFileName = "after/" + fileName;
+    doTest(beforeFileName, afterFileName);
   }
 
-  protected void doTest(String fileName) throws IOException {
-    final PsiFile psiDelombokFile = loadToPsiFile("after/" + fileName);
-    final PsiFile psiLombokFile = loadToPsiFile("before/" + fileName);
+  protected void doTest(final String beforeFileName, final String afterFileName) throws IOException {
+    final PsiFile psiDelombokFile = loadToPsiFile(afterFileName);
+    final PsiFile psiLombokFile = loadToPsiFile(beforeFileName);
 
     if (!(psiLombokFile instanceof PsiJavaFile) || !(psiDelombokFile instanceof PsiJavaFile)) {
       fail("The test file type is not supported");
@@ -167,7 +173,7 @@ public abstract class LombokParsingTestCase extends LombokLightCodeInsightTestCa
       Collection<String> afterAnnotations = Lists.newArrayList(Collections2.transform(Arrays.asList(afterModifierList.getAnnotations()), new QualifiedNameFunction()));
 
       Iterables.removeIf(beforeAnnotations, Predicates.containsPattern("lombok.*"));
-      assertEquals("Annotationcounts are different ", afterAnnotations.size(), beforeAnnotations.size());
+      assertThat("Annotations are different", beforeAnnotations, equalTo(afterAnnotations));
     }
   }
 

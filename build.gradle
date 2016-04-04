@@ -32,6 +32,9 @@ dependencies {
 
     gen files('lib/grammar-kit.jar')
     gen files('lib/light-psi-all.jar')
+
+    testCompile "org.mockito:mockito-core:1.+"
+    testCompile 'junit:junit:4.12'
 }
 
 
