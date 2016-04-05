@@ -16,7 +16,7 @@ before_install:
  - zip -r ideaIC-13.1.6.zip ideaIC-13.1.6/*
  - wget http://download.jetbrains.com/idea/ideaIC-13.1.6-src.tar.bz2
  - mkdir ideaIC-13.1.6_src
- - tar -C ideaIC-13.1.6_src --strip-components=1 -xzvf ideaIC-13.1.6-src.tar.bz2
+ - tar -C ideaIC-13.1.6_src --strip-components=1 -xvjf ideaIC-13.1.6-src.tar.bz2
  - zip -r ideaIC-13.1.6_src.zip ideaIC-13.1.6_src/*
  - mvn install:install-file -Dfile=ideaIC-13.1.6.zip -Dsources=ideaIC-13.1.6_src.zip -DgroupId=com.jetbrains.intellij.idea -DartifactId=ideaIC -Dversion=13.1.6 -Dpackaging=zip
 
