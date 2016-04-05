@@ -12,7 +12,7 @@ before_install:
  - pip install --user codecov
  - wget http://download.jetbrains.com/idea/ideaIU-13.1.6.tar.gz
  - mkdir ideaIU-13.1.6
- - tar -C ideaIU-13.1.6.tar.gz zxvf ideaIU-13.1.6
+ - tar -C ideaIU-13.1.6 zxvf ideaIU-13.1.6.tar.gz
  - zip -r ideaIU-13.1.6.tar.gz ideaIU-13.1.6.zip
  - mvn install:install-file -Dfile=ideaIU-13.1.6.zip -DgroupId=com.jetbrains.intellij.idea -DartifactId=ideaIU -Dversion=13.1.6 -Dpackaging=zip
 
