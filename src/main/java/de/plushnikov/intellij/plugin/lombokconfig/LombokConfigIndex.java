@@ -1,8 +1,8 @@
 package de.plushnikov.intellij.plugin.lombokconfig;
 
+import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.PathUtil;
 import com.intellij.util.indexing.DataIndexer;
 import com.intellij.util.indexing.DefaultFileTypeSpecificInputFilter;
 import com.intellij.util.indexing.FileBasedIndex;
@@ -50,8 +50,9 @@ public class LombokConfigIndex extends FileBasedIndexExtension<ConfigIndexKey, S
 
         final VirtualFile directoryFile = inputData.getFile().getParent();
         if (null != directoryFile) {
-          final String canonicalPath = PathUtil.toSystemIndependentName(directoryFile.getCanonicalPath());
-          if (null != canonicalPath) {
+          final String directoryFileCanonicalPath = directoryFile.getCanonicalPath();
+          if (null != directoryFileCanonicalPath) {
+            final String canonicalPath = FileUtil.toSystemIndependentName(directoryFileCanonicalPath);
             final Map<String, String> configValues = extractValues((LombokConfigFile) inputData.getPsiFile());
 
             result = new HashMap<ConfigIndexKey, String>();

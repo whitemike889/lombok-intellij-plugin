@@ -3,7 +3,7 @@
   <id>Lombook Plugin</id>
   <name>Lombok Plugin</name>
   <vendor url="https://github.com/mplushnikov/lombok-intellij-plugin" email="lombokplugin@plushnikov.de">Michail Plushnikov</vendor>
-  <version>0.11</version>
+  <version>0.11.1</version>
 
     <idea-version since-build="133.00" until-build="137.9999"/>
 
@@ -191,11 +191,12 @@
     <!--TODO @Builder is not supported on constructors with constructor type parameters..-->
     <change-notes><![CDATA[
 		<ul>
-		<li>0.11
+		<li>0.11.1
 				<ol>
-				     <li>Fixed #153: Configuration keys</li>
+				     <li>Fixed #53: Configuration keys</li>
 				     <li>Fixed #125: Support for lombok.getter.noIsPrefix</li>
 				     <li>Fixed #128: Support @Slf4j with custom logger name</li>
+				     <li>Fixed #201: Downgrade api for Intellij 13.0.4</li>
 				</ol>
 			</li>
 		<li>0.10

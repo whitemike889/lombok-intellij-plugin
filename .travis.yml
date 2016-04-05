@@ -5,11 +5,13 @@ jdk:
   - oraclejdk8
 
 env:
-  - IDEA_VERSION=IC-13.1.6
+  - IDEA_VERSION=IU-13.1.6
 
 before_install:
  - chmod +x gradlew
  - pip install --user codecov
+ - wget http://download.jetbrains.com/idea/ideaIU-13.1.6.tar.gz
+ - mvn install:install-file -Dfile=ideaIU-13.1.6.tar.gz -DgroupId=com.jetbrains.intellij.idea -DartifactId=ideaIU -Dversion=13.1.6 -Dpackaging=tar.gz
 
 after_success:
   - codecov
