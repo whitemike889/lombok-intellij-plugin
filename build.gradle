@@ -176,7 +176,8 @@ intellij {
 //    sameSinceUntilBuild = version == "LATEST-EAP-SNAPSHOT"
     sandboxDirectory = "${project.projectDir}/idea-sandbox/idea-${version}"
     systemProperty 'idea.is.internal', 'false'
-    downloadSources !Boolean.valueOf(System.getenv('CI'))
+    downloadSources false
+//    !Boolean.valueOf(System.getenv('CI'))
 
     publish {
         pluginId '6317'
